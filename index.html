@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EQP Tools</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #1c3767 0%, #4d9f95 100%);
+        min-height: 100vh;
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .container {
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        padding: 40px;
+        width: 90%;
+        max-width: 500px;
+        text-align: center;
+      }
+
+      .profile-img {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 3px solid #eee;
+        margin: 0 auto 20px;
+      }
+
+      h1 {
+        color: #333;
+        margin-bottom: 5px;
+        font-size: 28px;
+      }
+
+      .subtitle {
+        color: #666;
+        margin-bottom: 30px;
+        font-size: 16px;
+      }
+
+      .link-button {
+        display: block;
+        width: 100%;
+        padding: 15px;
+        margin: 15px 0;
+        background: #f8f9fa;
+        color: #333;
+        text-decoration: none;
+        border-radius: 10px;
+        font-weight: 600;
+        font-size: 16px;
+        border: 1px solid #eee;
+        transition: all 0.3s ease;
+        text-align: center;
+      }
+
+      .link-button:hover {
+        background: #007bff;
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
+      }
+
+      .link-button:active {
+        transform: translateY(0);
+      }
+
+      .requirements {
+        background: #fff8e1;
+        border-left: 4px solid #ffc107;
+        padding: 15px;
+        margin: 25px 0;
+        text-align: left;
+        border-radius: 0 8px 8px 0;
+      }
+
+      .requirements-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+      }
+
+      .requirements-header h3 {
+        color: #333;
+        margin: 0;
+      }
+
+      .toggle-button {
+        background: none;
+        border: none;
+        font-size: 18px;
+        cursor: pointer;
+        color: #333;
+        transition: transform 0.3s;
+      }
+
+      .toggle-button.rotated {
+        transform: rotate(180deg);
+      }
+
+      .requirements-content {
+        margin-top: 15px;
+        display: none;
+      }
+
+      .requirements-content.show {
+        display: block;
+      }
+
+      .requirements-content p {
+        margin: 10px 0;
+      }
+
+      .requirements-content ul {
+        padding-left: 20px;
+        margin: 10px 0;
+      }
+
+      .requirements-content li {
+        margin-bottom: 8px;
+        color: #555;
+      }
+
+      .contact {
+        background: #e8f5e9;
+        border-left: 4px solid #4caf50;
+        padding: 15px;
+        margin: 25px 0;
+        text-align: left;
+        border-radius: 0 8px 8px 0;
+      }
+
+      .contact h3 {
+        color: #333;
+        margin-bottom: 10px;
+      }
+
+      .contact p {
+        color: #555;
+        margin-bottom: 15px;
+      }
+
+      .whatsapp-link {
+        display: inline-block;
+        background: #4caf50;
+        color: white;
+        padding: 10px 15px;
+        border-radius: 5px;
+        text-decoration: none;
+        font-weight: 600;
+        transition: background 0.3s;
+      }
+
+      .whatsapp-link:hover {
+        background: #388e3c;
+      }
+
+      .footer {
+        margin-top: 30px;
+        color: #999;
+        font-size: 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>AZS EQP Tools</h1>
+      <p class="subtitle">Access all your equipment management tools</p>
+      
+      <a
+        href="#"
+        class="link-button"
+        onclick="navigateToLink('http://10.99.200.224:3000/form')"
+      >
+        Create BM Report
+      </a>
+
+      <a
+        href="#"
+        class="link-button"
+        onclick="navigateToLink('http://10.99.200.224:3000')"
+      >
+        EQP-Dashboard
+      </a>
+
+      <a
+        href="#"
+        class="link-button"
+        onclick="navigateToLink('https://docs.google.com/spreadsheets/d/1w7NTzKjbhFGn13vy40Bw_qmfH1Twu84qRgns7gtkoT4/edit?usp=sharing')"
+      >
+        FIND DRAWER SPARE PARTS (WS AZS)
+      </a>
+
+      <a
+        href="#"
+        class="link-button"
+        onclick="navigateToLink('https://tool3.example.com')"
+      >
+        Tool 3
+      </a>
+
+      <div class="requirements">
+        <div class="requirements-header" onclick="toggleRequirements()">
+          <h3>Access Requirements</h3>
+          <button class="toggle-button rotated" id="toggleButton">▼</button>
+        </div>
+        <div class="requirements-content" id="requirementsContent">
+          <p>
+            <strong>Important:</strong> EQP-Dashboard can only be accessed using
+            internal WiFi.
+          </p>
+
+          <p><strong>Desktop Access:</strong></p>
+          <ul>
+            <li>LGES_WIN</li>
+            <li>HLI_MOB</li>
+          </ul>
+
+          <p><strong>Mobile Access:</strong></p>
+          <ul>
+            <li>EQP-Dashboard_Main (AZS Production Line only)</li>
+            <li>EQP-Dashboard (AZS Production Line only)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="contact">
+        <h3>Need Help?</h3>
+        <a
+          href="https://wa.me/62895333537537?text=Hello,%20I'm%20having%20trouble%20accessing%20the%20EQP%20tools.%20Can%20you%20please%20help%20me?"
+          class="whatsapp-link"
+          target="_blank"
+        >
+          Contact Support on WhatsApp
+        </a>
+      </div>
+
+      <p class="footer">Click any link to access the tool</p>
+    </div>
+
+    <script>
+      function navigateToLink(url) {
+        // Open the link in the same tab
+        window.location.href = url;
+      }
+
+      function toggleRequirements() {
+        const content = document.getElementById("requirementsContent");
+        const button = document.getElementById("toggleButton");
+
+        content.classList.toggle("show");
+        button.classList.toggle("rotated");
+      }
+    </script>
+  </body>
+</html>
