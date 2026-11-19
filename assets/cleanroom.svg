@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900">
+<defs>
+<pattern id="vents" width="8" height="8" patternUnits="userSpaceOnUse"><path d="M0 4h8" stroke="#577475" stroke-width="2"/></pattern>
+<g id="machine">
+<path d="M32 294 96 253H420l-42 41Z" fill="#c0d0d1" stroke="#71898c" stroke-width="3"/>
+<path d="M378 294l42-41v416l-42 48Z" fill="#91a8aa" stroke="#71898c" stroke-width="3"/>
+<rect x="32" y="294" width="346" height="423" rx="5" fill="#dbe5e5" stroke="#71898c" stroke-width="3"/>
+<rect x="51" y="325" width="308" height="217" rx="4" fill="#5d7b7e" stroke="#a6b9b9" stroke-width="9"/>
+<path d="M59 475h293m-277 0 34-50h207l36 50m-242-50v-64m205 64v-64" fill="none" stroke="#b8cccc" stroke-width="4"/>
+<path d="m59 407 173-74h60L59 434zm300 9L94 536H66l293-135Z" fill="#d7eeee" opacity=".16"/>
+<path d="M204 325v217M32 567h346M204 567v150" stroke="#819b9d" stroke-width="3"/>
+<path d="M190 419v34m28-34v34m-39 141h13m25 0h13" stroke="#d8e6e4" stroke-width="5" stroke-linecap="round"/>
+<rect x="65" y="627" width="93" height="56" rx="3" fill="url(#vents)"/>
+<rect x="259" y="342" width="86" height="56" rx="5" fill="#344e50" stroke="#a7bbbd" stroke-width="3"/>
+<path d="M272 377h13l8-14 11 17 8-9h19" fill="none" stroke="#8ad1bf" stroke-width="2"/>
+<path d="M344 292v-45" stroke="#688183" stroke-width="6"/>
+<rect x="337" y="239" width="14" height="29" rx="3" fill="#71b7a0"/>
+</g>
+</defs>
+<path fill="#dbe5e6" d="M0 0h1600v900H0z"/>
+<path fill="#bdcecf" d="M0 0h1600L991 323H609Z"/>
+<path fill="#b0c3c5" d="M0 900h1600L988 501H612Z"/>
+<path fill="#e8eeee" stroke="#a2b6b8" stroke-width="3" d="M609 323h382v178H609z"/>
+<path d="M0 90l609 233M1600 90 991 323M0 749l612-248m988 248L988 501M0 450h609m382 0h609M235 0l461 323M1365 0 904 323M390 900l282-399m538 399L928 501M0 827h1600M320 697h960M520 589h560" fill="none" stroke="#91aaad" stroke-width="3" opacity=".67"/>
+<path d="M330 42h940l-36 20H366Zm176 91h588l-40 22H546Zm116 70h356l-28 14H650Zm63 52h230l-22 10H707Z" fill="#f8ffff"/>
+<path d="M0 224h238v63H0zm1362 0h238v63h-238z" fill="url(#vents)" opacity=".42"/>
+<use href="#machine" transform="translate(319 148) scale(.65)"/>
+<use href="#machine" transform="translate(1281 148) scale(-.65 .65)"/>
+<use href="#machine" transform="translate(-33 0)"/>
+<use href="#machine" transform="translate(1633 0) scale(-1 1)"/>
+<path d="M308 900 659 510m633 390L941 510" fill="none" stroke="#f2f8f7" stroke-width="7" opacity=".65"/>
+</svg>
