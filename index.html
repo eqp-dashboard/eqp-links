@@ -1,225 +1,149 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>EQP Tools</title>
+    <script>
+      try {
+        if (localStorage.getItem('eqp_theme') === 'light') {
+          document.documentElement.dataset.theme = 'light';
+        }
+      } catch {}
+    </script>
     <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
+      /* Color tokens from BM Dashboard app/globals.css. */
+      html[data-theme="light"] {
+        color-scheme: light;
+        --background: hsl(220 29% 95%);
+        --foreground: hsl(222 47% 11%);
+        --card: hsl(0 0% 100%);
+        --primary: hsl(172.68 40% 30%);
+        --primary-foreground: hsl(0 0% 100%);
+        --muted: hsl(225 40% 98%);
+        --muted-foreground: hsl(215 19% 40%);
+        --accent: hsl(220 29% 95%);
+        --border: hsl(220 20% 86%);
+        --ring: hsl(172.68 40% 30%);
       }
-
+      :root {
+        color-scheme: dark;
+        --background: hsl(230 20% 6%);
+        --foreground: hsl(240 10% 96%);
+        --card: hsl(231 15% 9%);
+        --primary: hsl(172.68 34.75% 46.27%);
+        --primary-foreground: hsl(230 20% 6%);
+        --muted: hsl(233 14% 11%);
+        --muted-foreground: hsl(218 11% 65%);
+        --accent: hsl(231 16% 16%);
+        --border: hsl(231 16% 22%);
+        --ring: hsl(172.68 34.75% 46.27%);
+      }
+      @font-face {
+        font-family: Geist;
+        src: url('./assets/GeistVF.woff') format('woff');
+        font-weight: 100 900;
+        font-display: swap;
+      }
+      * { box-sizing: border-box; }
       body {
-        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-        background: linear-gradient(135deg, #1c3767 0%, #4d9f95 100%);
+        margin: 0;
         min-height: 100vh;
-        padding: 20px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        font: 14px/1.5 Geist, system-ui, sans-serif;
+        background: var(--background);
+        color: var(--foreground);
       }
-
-      .container {
-        background: white;
-        border-radius: 15px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-        padding: 40px;
-        width: 90%;
-        max-width: 500px;
-        text-align: center;
-      }
-
-      .profile-img {
-        width: 100px;
-        height: 100px;
-        border-radius: 50%;
-        object-fit: cover;
-        border: 3px solid #eee;
-        margin: 0 auto 20px;
-      }
-
-      h1 {
-        color: #333;
-        margin-bottom: 5px;
-        font-size: 28px;
-      }
-
-      .subtitle {
-        color: #666;
-        margin-bottom: 30px;
-        font-size: 16px;
-      }
-
-      .link-button {
-        display: block;
-        width: 100%;
-        padding: 15px;
-        margin: 15px 0;
-        background: #f8f9fa;
-        color: #333;
-        text-decoration: none;
-        border-radius: 10px;
-        font-weight: 600;
-        font-size: 16px;
-        border: 1px solid #eee;
-        transition: all 0.3s ease;
-        text-align: center;
-      }
-
-      .link-button:hover {
-        background: #007bff;
-        color: white;
-        transform: translateY(-2px);
-        box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
-      }
-
-      .link-button:active {
-        transform: translateY(0);
-      }
-
-      .requirements {
-        background: #fff8e1;
-        border-left: 4px solid #ffc107;
-        padding: 15px;
-        margin: 25px 0;
-        text-align: left;
-        border-radius: 0 8px 8px 0;
-      }
-
-      .requirements-header {
+      .topbar { background: var(--card); border-bottom: 1px solid var(--border); }
+      .topbar-inner {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        cursor: pointer;
+        gap: 12px;
+        max-width: 552px;
+        margin: auto;
+        padding: 8px 16px;
       }
-
-      .requirements-header h3 {
-        color: #333;
-        margin: 0;
+      .logo { display: block; width: 144px; height: auto; max-width: 100%; }
+      .logo-light, [data-theme="light"] .logo-dark { display: none; }
+      [data-theme="light"] .logo-light { display: block; }
+      main {
+        width: min(520px, calc(100% - 32px));
+        margin: clamp(16px, 4vw, 40px) auto;
+        padding: clamp(16px, 4vw, 28px);
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 8px;
       }
-
-      .toggle-button {
-        background: none;
-        border: none;
-        font-size: 18px;
-        cursor: pointer;
-        color: #333;
-        transition: transform 0.3s;
-      }
-
-      .toggle-button.rotated {
-        transform: rotate(180deg);
-      }
-
-      .requirements-content {
-        margin-top: 15px;
-        display: none;
-      }
-
-      .requirements-content.show {
-        display: block;
-      }
-
-      .requirements-content p {
-        margin: 10px 0;
-      }
-
-      .requirements-content ul {
-        padding-left: 20px;
-        margin: 10px 0;
-      }
-
-      .requirements-content li {
-        margin-bottom: 8px;
-        color: #555;
-      }
-
-      .contact {
-        background: #e8f5e9;
-        border-left: 4px solid #4caf50;
-        padding: 15px;
-        margin: 25px 0;
-        text-align: left;
-        border-radius: 0 8px 8px 0;
-      }
-
-      .contact h3 {
-        color: #333;
-        margin-bottom: 10px;
-      }
-
-      .contact p {
-        color: #555;
-        margin-bottom: 15px;
-      }
-
-      .whatsapp-link {
-        display: inline-block;
-        background: #4caf50;
-        color: white;
-        padding: 10px 15px;
-        border-radius: 5px;
-        text-decoration: none;
+      h1 { margin: 0; font-size: clamp(21px, 5vw, 26px); letter-spacing: -.025em; }
+      h2 { margin: 0 0 8px; font-size: 14px; }
+      .subtitle, .footer, .requirements-content, .reserved { color: var(--muted-foreground); }
+      .subtitle { margin: 4px 0 20px; }
+      .footer { margin: 16px 0 0; font-size: 12px; text-align: center; }
+      .link-button, .whatsapp-link, .theme-toggle {
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        color: inherit;
+        background: var(--muted);
+        font: inherit;
         font-weight: 600;
-        transition: background 0.3s;
+        text-decoration: none;
       }
-
-      .whatsapp-link:hover {
-        background: #388e3c;
+      .link-button { display: block; padding: 10px 12px; margin: 8px 0; }
+      .theme-toggle, .whatsapp-link { display: inline-block; padding: 8px 12px; cursor: pointer; }
+      .primary { background: var(--primary); color: var(--primary-foreground); border-color: var(--primary); }
+      .reserved { color: var(--muted-foreground); }
+      a:hover:not(.primary), button:hover { background: var(--accent); }
+      .primary:hover { filter: brightness(.9); }
+      :focus-visible { outline: 2px solid var(--ring); outline-offset: 3px; }
+      .requirements, .contact {
+        margin-top: 16px;
+        padding: 10px 12px;
+        background: var(--muted);
+        border: 1px solid var(--border);
+        border-radius: 8px;
       }
-
-      .footer {
-        margin-top: 30px;
-        color: #999;
-        font-size: 14px;
-      }
+      summary { cursor: pointer; font-weight: 600; }
+      .requirements-content ul { padding-inline-start: 20px; }
     </style>
   </head>
   <body>
-    <div class="container">
+    <header class="topbar">
+      <div class="topbar-inner">
+        <img class="logo logo-dark" src="./assets/logo-hli-ui-dark.png" width="640" height="112" alt="HLI Green Power" />
+        <img class="logo logo-light" src="./assets/logo-hli-ui.png" width="640" height="112" alt="HLI Green Power" />
+        <button type="button" class="theme-toggle" id="theme-toggle" hidden>Light mode</button>
+      </div>
+    </header>
+    <main>
       <h1>Assembly EQP Tools</h1>
       <p class="subtitle">Access all your equipment management tools</p>
-      
+
       <a
-        href="#"
-        class="link-button"
-        onclick="navigateToLink('http://10.99.65.254:3000/downtime-form')"
+        href="http://10.99.65.254:3000/downtime-form"
+        class="link-button primary"
       >
         Create BM Report
       </a>
 
       <a
-        href="#"
+        href="http://10.99.65.254:3000"
         class="link-button"
-        onclick="navigateToLink('http://10.99.65.254:3000')"
       >
         EQP-Dashboard
       </a>
 
-      <a
-        href="#"
-        class="link-button"
-        <!-- onclick="navigateToLink('https://docs.google.com/spreadsheets/d/1w7NTzKjbhFGn13vy40Bw_qmfH1Twu84qRgns7gtkoT4/edit?usp=sharing')" -->
-      >
-        RESERVED
-      </a>
+      <span class="link-button reserved">RESERVED</span>
 
       <a
-        href="#"
+        href="https://docs.google.com/forms/d/e/1FAIpQLScJyM8mZeOM-2mU4baZeEbRfaBT-PPgZPKxsD3bGwLzgWsO5A/viewform"
         class="link-button"
-        onclick="navigateToLink('https://docs.google.com/forms/d/e/1FAIpQLScJyM8mZeOM-2mU4baZeEbRfaBT-PPgZPKxsD3bGwLzgWsO5A/viewform')"
       >
         [temp] AZS 1st PnP Worn Out Inspection Form
       </a>
 
-      <div class="requirements">
-        <div class="requirements-header" onclick="toggleRequirements()">
-          <h3>Access Requirements</h3>
-          <button class="toggle-button rotated" id="toggleButton">▼</button>
-        </div>
-        <div class="requirements-content" id="requirementsContent">
+      <details class="requirements">
+        <summary>Access Requirements</summary>
+        <div class="requirements-content">
           <p>
             <strong>Important:</strong> EQP-Dashboard can only be accessed using
             internal WiFi.
@@ -237,35 +161,35 @@
             <li>EQP-Dashboard (AZS Production Line only)</li>
           </ul>
         </div>
-      </div>
+      </details>
 
       <div class="contact">
-        <h3>Need Help?</h3>
+        <h2>Need Help?</h2>
         <a
           href="https://wa.me/62895333537537?text=Hello,%20I'm%20having%20trouble%20accessing%20the%20EQP%20tools.%20Can%20you%20please%20help%20me?"
           class="whatsapp-link"
           target="_blank"
+          rel="noopener noreferrer"
         >
           Contact Support on WhatsApp
         </a>
       </div>
 
       <p class="footer">Click any link to access the tool</p>
-    </div>
-
+    </main>
     <script>
-      function navigateToLink(url) {
-        // Open the link in the same tab
-        window.location.href = url;
+      const root = document.documentElement;
+      const toggle = document.getElementById('theme-toggle');
+      function updateToggle() {
+        toggle.textContent = root.dataset.theme === 'dark' ? 'Light mode' : 'Dark mode';
       }
-
-      function toggleRequirements() {
-        const content = document.getElementById("requirementsContent");
-        const button = document.getElementById("toggleButton");
-
-        content.classList.toggle("show");
-        button.classList.toggle("rotated");
-      }
+      toggle.addEventListener('click', () => {
+        root.dataset.theme = root.dataset.theme === 'dark' ? 'light' : 'dark';
+        try { localStorage.setItem('eqp_theme', root.dataset.theme); } catch {}
+        updateToggle();
+      });
+      updateToggle();
+      toggle.hidden = false;
     </script>
   </body>
 </html>
