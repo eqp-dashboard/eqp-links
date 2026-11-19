@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>EQP Tools</title>
+    <title>Cell Equipment Technology | Assembly Dashboard</title>
     <script>
       try {
         if (localStorage.getItem('eqp_theme') === 'light') {
@@ -49,6 +49,9 @@
       body {
         margin: 0;
         min-height: 100vh;
+        min-height: 100dvh;
+        display: grid;
+        grid-template-rows: auto 1fr;
         font: 14px/1.5 Geist, system-ui, sans-serif;
         background: var(--background);
         color: var(--foreground);
@@ -68,18 +71,18 @@
       [data-theme="light"] .logo-light { display: block; }
       main {
         width: min(520px, calc(100% - 32px));
-        margin: clamp(16px, 4vw, 40px) auto;
+        place-self: center;
+        margin: 16px 0;
+        text-align: center;
         padding: clamp(16px, 4vw, 28px);
         background: var(--card);
         border: 1px solid var(--border);
         border-radius: 8px;
       }
       h1 { margin: 0; font-size: clamp(21px, 5vw, 26px); letter-spacing: -.025em; }
-      h2 { margin: 0 0 8px; font-size: 14px; }
-      .subtitle, .footer, .requirements-content, .reserved { color: var(--muted-foreground); }
-      .subtitle { margin: 4px 0 20px; }
-      .footer { margin: 16px 0 0; font-size: 12px; text-align: center; }
-      .link-button, .whatsapp-link, .theme-toggle {
+      .section-title { margin: 4px 0 0; font-size: 17px; font-weight: 600; }
+      .subtitle { margin: 4px 0 20px; color: var(--muted-foreground); }
+      .link-button, .theme-toggle {
         border: 1px solid var(--border);
         border-radius: 8px;
         color: inherit;
@@ -89,21 +92,12 @@
         text-decoration: none;
       }
       .link-button { display: block; padding: 10px 12px; margin: 8px 0; }
-      .theme-toggle, .whatsapp-link { display: inline-block; padding: 8px 12px; cursor: pointer; }
+      .theme-toggle { display: inline-block; padding: 8px 12px; cursor: pointer; }
       .primary { background: var(--primary); color: var(--primary-foreground); border-color: var(--primary); }
-      .reserved { color: var(--muted-foreground); }
+      .link-button small { display: block; font-size: 12px; font-weight: 500; }
       a:hover:not(.primary), button:hover { background: var(--accent); }
       .primary:hover { filter: brightness(.9); }
       :focus-visible { outline: 2px solid var(--ring); outline-offset: 3px; }
-      .requirements, .contact {
-        margin-top: 16px;
-        padding: 10px 12px;
-        background: var(--muted);
-        border: 1px solid var(--border);
-        border-radius: 8px;
-      }
-      summary { cursor: pointer; font-weight: 600; }
-      .requirements-content ul { padding-inline-start: 20px; }
     </style>
   </head>
   <body>
@@ -115,67 +109,25 @@
       </div>
     </header>
     <main>
-      <h1>Assembly EQP Tools</h1>
-      <p class="subtitle">Access all your equipment management tools</p>
+      <h1>Cell Equipment Technology</h1>
+      <p class="section-title">Assembly - Dashboard</p>
+      <p class="subtitle">All-in-one equipment management platform</p>
 
       <a
         href="http://10.99.65.254:3000/downtime-form"
         class="link-button primary"
       >
         Create BM Report
+        <small>AZS / PKG</small>
       </a>
 
       <a
         href="http://10.99.65.254:3000"
         class="link-button"
       >
-        EQP-Dashboard
+        BM Dashboard
+        <small>AZS / PKG</small>
       </a>
-
-      <span class="link-button reserved">RESERVED</span>
-
-      <a
-        href="https://docs.google.com/forms/d/e/1FAIpQLScJyM8mZeOM-2mU4baZeEbRfaBT-PPgZPKxsD3bGwLzgWsO5A/viewform"
-        class="link-button"
-      >
-        [temp] AZS 1st PnP Worn Out Inspection Form
-      </a>
-
-      <details class="requirements">
-        <summary>Access Requirements</summary>
-        <div class="requirements-content">
-          <p>
-            <strong>Important:</strong> EQP-Dashboard can only be accessed using
-            internal WiFi.
-          </p>
-
-          <p><strong>Desktop Access:</strong></p>
-          <ul>
-            <li>LGES_WIN</li>
-            <li>HLI_MOB</li>
-          </ul>
-
-          <p><strong>Mobile Access:</strong></p>
-          <ul>
-            <li>EQP-Dashboard_Main (AZS Production Line only)</li>
-            <li>EQP-Dashboard (AZS Production Line only)</li>
-          </ul>
-        </div>
-      </details>
-
-      <div class="contact">
-        <h2>Need Help?</h2>
-        <a
-          href="https://wa.me/62895333537537?text=Hello,%20I'm%20having%20trouble%20accessing%20the%20EQP%20tools.%20Can%20you%20please%20help%20me?"
-          class="whatsapp-link"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Contact Support on WhatsApp
-        </a>
-      </div>
-
-      <p class="footer">Click any link to access the tool</p>
     </main>
     <script>
       const root = document.documentElement;
