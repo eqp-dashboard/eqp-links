@@ -51,24 +51,11 @@
         min-height: 100vh;
         min-height: 100dvh;
         display: grid;
-        grid-template-rows: auto 1fr;
+        padding-block: 60px;
         font: 14px/1.5 Geist, system-ui, sans-serif;
         background: var(--background);
         color: var(--foreground);
       }
-      .topbar { background: var(--card); border-bottom: 1px solid var(--border); }
-      .topbar-inner {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 12px;
-        max-width: 552px;
-        margin: auto;
-        padding: 8px 16px;
-      }
-      .logo { display: block; width: 144px; height: auto; max-width: 100%; }
-      .logo-light, [data-theme="light"] .logo-dark { display: none; }
-      [data-theme="light"] .logo-light { display: block; }
       main {
         width: min(520px, calc(100% - 32px));
         place-self: center;
@@ -92,7 +79,18 @@
         text-decoration: none;
       }
       .link-button { display: block; padding: 10px 12px; margin: 8px 0; }
-      .theme-toggle { display: inline-block; padding: 8px 12px; cursor: pointer; }
+      .theme-toggle {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        width: 44px;
+        height: 44px;
+        display: grid;
+        place-items: center;
+        cursor: pointer;
+      }
+      .theme-toggle[hidden], .moon, [data-theme="light"] .sun { display: none; }
+      [data-theme="light"] .moon { display: block; }
       .primary { background: var(--primary); color: var(--primary-foreground); border-color: var(--primary); }
       .link-button small { display: block; font-size: 12px; font-weight: 500; }
       a:hover:not(.primary), button:hover { background: var(--accent); }
@@ -101,13 +99,15 @@
     </style>
   </head>
   <body>
-    <header class="topbar">
-      <div class="topbar-inner">
-        <img class="logo logo-dark" src="./assets/logo-hli-ui-dark.png" width="640" height="112" alt="HLI Green Power" />
-        <img class="logo logo-light" src="./assets/logo-hli-ui.png" width="640" height="112" alt="HLI Green Power" />
-        <button type="button" class="theme-toggle" id="theme-toggle" hidden>Light mode</button>
-      </div>
-    </header>
+    <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Switch to light mode" hidden>
+      <svg class="sun" aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <circle cx="12" cy="12" r="4" />
+        <path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5" />
+      </svg>
+      <svg class="moon" aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round">
+        <path d="M20.9 13.4A9 9 0 1 1 10.6 3.1a7 7 0 0 0 10.3 10.3Z" />
+      </svg>
+    </button>
     <main>
       <h1>Cell Equipment Technology</h1>
       <p class="section-title">Assembly - Dashboard</p>
@@ -133,7 +133,9 @@
       const root = document.documentElement;
       const toggle = document.getElementById('theme-toggle');
       function updateToggle() {
-        toggle.textContent = root.dataset.theme === 'dark' ? 'Light mode' : 'Dark mode';
+        const label = root.dataset.theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode';
+        toggle.setAttribute('aria-label', label);
+        toggle.title = label;
       }
       toggle.addEventListener('click', () => {
         root.dataset.theme = root.dataset.theme === 'dark' ? 'light' : 'dark';
