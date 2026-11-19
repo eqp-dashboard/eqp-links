@@ -51,7 +51,7 @@
         min-height: 100vh;
         min-height: 100dvh;
         display: grid;
-        padding-block: 60px;
+        padding-block: clamp(60px, 10vh, 96px) 32px;
         font: 14px/1.5 Geist, system-ui, sans-serif;
         background: var(--background);
         color: var(--foreground);
@@ -63,7 +63,8 @@
         inset: 0;
         z-index: -1;
         pointer-events: none;
-        background: url('./assets/maintenance-workshop.jpg') center / cover no-repeat;
+        background: linear-gradient(to bottom, var(--background), transparent 42%),
+                    url('./assets/maintenance-workshop.jpg') center / cover no-repeat;
         opacity: .52;
       }
       [data-theme="light"] body::before { opacity: .74; }
@@ -71,18 +72,13 @@
         body::before { background-position: 14% center; }
       }
       main {
-        width: min(520px, calc(100% - 32px));
-        place-self: center;
-        margin: 16px 0;
+        width: min(640px, calc(100% - 32px));
+        place-self: start center;
         text-align: center;
-        padding: clamp(16px, 4vw, 28px);
-        background: var(--card);
-        border: 1px solid var(--border);
-        border-radius: 8px;
       }
-      h1 { margin: 0; font-size: clamp(21px, 5vw, 26px); letter-spacing: -.025em; }
-      .section-title { margin: 4px 0 0; font-size: 17px; font-weight: 600; }
-      .subtitle { margin: 4px 0 20px; color: var(--muted-foreground); }
+      h1 { margin: 0; font-size: clamp(34px, 4.8vw, 42px); line-height: 1.15; letter-spacing: -.025em; text-wrap: balance; }
+      .section-title { margin: 8px 0 0; font-size: clamp(18px, 2.4vw, 22px); font-weight: 600; line-height: 1.25; }
+      .subtitle { margin: 6px 0 clamp(32px, 5vh, 46px); font-size: clamp(15px, 1.8vw, 17px); line-height: 1.4; color: var(--muted-foreground); text-wrap: balance; }
       .link-button, .theme-toggle {
         border: 1px solid var(--border);
         border-radius: 8px;
@@ -92,7 +88,7 @@
         font-weight: 600;
         text-decoration: none;
       }
-      .link-button { display: block; padding: 10px 12px; margin: 8px 0; }
+      .link-button { display: block; width: min(100%, 320px); padding: 11px 16px; margin: 10px auto 0; }
       .theme-toggle {
         position: absolute;
         top: 12px;
